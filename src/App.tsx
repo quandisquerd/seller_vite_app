@@ -17,34 +17,36 @@ import { useCheckRestaurantQuery } from './api/restaurant';
 import CheckRestaurant from './page/restaurant/CheckRestaurant';
 import LoadingOverlay from './utils/loading';
 import CreateRestaurant from './page/restaurant/CreateRestaurant';
+import ProductDetail from './page/menu/ProductDetail';
 
 const App = () => {
   const [clicks, setclick] = useState<any>(1)
   const user = JSON.parse(localStorage?.getItem('user')!)
   const data_decrypto = decryptMessage(user)
-  const dec = data_decrypto ?  JSON.parse(data_decrypto) :""
-  const { data: checkres , isLoading:checking } = useCheckRestaurantQuery(dec? dec?.id : "")
-  console.log(checkres);
-  
+  const dec = data_decrypto ? JSON.parse(data_decrypto) : ""
+  const { data: checkres, isLoading: checking } = useCheckRestaurantQuery(dec ? dec?.id : "")
   const click = (value) => {
     setclick(value);
   }
-  
+
 
   return (
     <>
-      {checking && <LoadingOverlay/>}
+      {checking && <LoadingOverlay />}
       <Router>
         <Routes>
 
           <Route path="/" element={user ? <Layout onClick={click} /> : <Login />}>
             {clicks == 1 ? <Route index element={checkres?.status ? <Home /> : <CheckRestaurant />} /> : <Route index element={<Spf />} />}
-            <Route path="/menu" element={<Menu />} />
+            <Route path="/menu"  >
+              <Route index element={<Menu />} />
+              <Route path=":id/detail" element={<ProductDetail/>}/>
+            </Route>
             <Route path="/createRestaurant" element={<CreateRestaurant />} />
           </Route>
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
-          
+
         </Routes>
       </Router>
 

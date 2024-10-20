@@ -1,8 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { pause } from "../utils/pause";
-const apiUrl: any = "http://127.0.0.1:8000/api/v1";
-console.log(apiUrl);
 
+const apiUrl: any = import.meta.env.VITE_API_URL;
 
 const apiAuth = createApi({
     reducerPath: "auth",

@@ -88,7 +88,7 @@ const MenuDetail = () => {
             .then(() => {
                 messageApi.success('Tạo sản phẩm thành công')
                 form.resetFields()
-                
+
             })
             .catch((data: any) => {
                 messageApi.open({
@@ -110,7 +110,7 @@ const MenuDetail = () => {
             .then(() => {
                 messageApi.success('Tạo danh mục thành công')
                 form.resetFields()
-                
+
             })
             .catch((data: any) => {
                 messageApi.open({
@@ -135,14 +135,19 @@ const MenuDetail = () => {
     return (
         <>
             {contextHolder}
-            {menuding && <LoadingOverlay />}
             {loadingcategory && <LoadingOverlay />}
             {loadingproduct && <LoadingOverlay />}
-            <div className=" flex">
-                <button className="pb-2 pl-2 line-clamp-3 mr-2" onClick={showDrawer} ><i className='ri-add-line r-1' />Thêm</button>
-                <button className="pb-2 pl-2 line-clamp-3" onClick={showDrawer1} ><i className='ri-add-line r-1' />Thêm danh mục </button>
-            </div>
-            <Collapse items={items} defaultActiveKey={allKeys} />
+            {
+                menuding ? <LoadingOverlay /> :
+                    <>
+                        <div className=" flex">
+                            <button className="pb-2 pl-2 line-clamp-3 mr-2" onClick={showDrawer} ><i className='ri-add-line r-1' />Thêm</button>
+                            <button className="pb-2 pl-2 line-clamp-3" onClick={showDrawer1} ><i className='ri-add-line r-1' />Thêm danh mục </button>
+                        </div>
+                        <Collapse items={items} defaultActiveKey={allKeys} />
+                    </>
+            }
+
             <Drawer
                 title="Thêm món"
                 width={720}
