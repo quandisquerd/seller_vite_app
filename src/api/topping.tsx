@@ -1,11 +1,12 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-const api_url: any ="http://127.0.0.1:8000/api/v1";
+
+const apiUrl: any = import.meta.env.VITE_API_URL;
 
 const apiTopping = createApi({
     reducerPath: "topping",
     tagTypes: ["Topping"],
     baseQuery: fetchBaseQuery({
-        baseUrl: api_url,
+        baseUrl: apiUrl,
         fetchFn: async (...args) => {
             return fetch(...args);
         },
