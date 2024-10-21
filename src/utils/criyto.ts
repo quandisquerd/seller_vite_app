@@ -1,5 +1,6 @@
 import CryptoJS from 'crypto-js';
-const key: any = process.env.REACT_APP_SECRET_KEY || "!@#$%^&**&^%$#@!";
+// const key: any = process.env.REACT_APP_SECRET_KEY || "!@#$%^&**&^%$#@!";
+const key: any = import.meta.env.VITE_API_SECRET_KEY;
 
 export function encryptMessage(message: any): string {
     const messageStr = typeof message === 'string' ? message : JSON.stringify(message);
